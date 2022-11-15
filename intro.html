@@ -6,33 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-    <title>초미니홈피 - 팬명록</title>
+    <title>코딩하고십조 - 팀 소개페이지(범석)</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap"
+          rel="stylesheet">
+
     <style>
         * {
             font-family: 'Noto Serif KR', serif;
         }
-        .mypic {
-            width: 100%;
-            height: 300px;
 
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.topstarnews.net/news/photo/201807/456143_108614_510.jpg');
-            background-position: center 30%;
+        h3 {
+            font-family: 'Pretendard-Thin';
+            color: black;
+            text-align: center;
+            font-style: italic;
+            font-weight: lighter;
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        /* page 1 */
+
+        .one {
             background-size: cover;
+            text-align: center;
+            padding-top: 180px;
+            padding-bottom: 130px;
+        }
 
-            color: white;
+        .profile {
+            border-radius: 30%;
+            display: inline-block;
+            padding: 0.5rem;
+            margin-top: 20px;
+            border: 1px solid gray;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgb(255, 255, 255, 0.5);
+        }
 
-            display: flex;
-            flex-direction: column;
+        .profile img {
+            border-radius: 30%;
+        }
+
+
+        /* page 3 */
+        .two {
+            text-align: center;
             align-items: center;
+        }
+
+        .contact_img {
+            width: 100%;
+            height: 500px;
+            padding-bottom: 60px;
+        }
+
+        .ct {
+            margin-top: 80px;
+            font-family: 'Roboto Slab', serif;
+            text-decoration: none;
+            color: white;
+            font-size: 50px;
+            font-style: italic;
+            margin: 35px;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Roboto Slab', serif;
+        }
+  #container {
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        .list {
+            width: 100%;
+            height: 100vh;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            scroll-snap-align: center;
+        }
+
+        /* .list:nth-child(1){
+            background-color: rgb(0, 0, 0);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        } */
+
+        .list:nth-child(2) {
+            background-color: #4e5a56;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .list:nth-child(3) {
+            background-color: #9d949e;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .list:nth-child(4) {
+            background-color: #e0d8cc;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .list:nth-child(5) {
+            background-color: #8a6e8a;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
         }
 
         .mypost {
@@ -48,59 +147,61 @@
             margin-top: 15px;
         }
 
-        .mycards {
-            width: 95%;
-            max-width: 500px;
-            margin: auto;
-        }
 
-        .mycards > .card {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
+<div id="container">
     <div class="mypic">
-        <h1>십센치(10cm) 팬명록</h1>
+        <h1></h1>
     </div>
-    <div class="mypost">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="name" placeholder="url">
-            <label for="floatingInput">닉네임</label>
+    <div class="list">
+        <div class="one">
+        <span class="profile"><img
+                src="https://raw.githubusercontent.com/MintZzz1009/team-introduction/6c38c49c60e8222721d3ff963ea42a0193bc556a/202211_me.jpg"
+                width="550px;" height="550px" alt=""/></span>
+            <h3><strong> 풀스택 개발자가 되고 싶은 김범석 입니다. </strong> <br> 함께 열심히 해봐요~ </h3>
         </div>
-        <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="comment"
-                style="height: 100px"></textarea>
-            <label for="floatingTextarea2">응원댓글</label>
+    </div>
+    <div class="list">
+        <div class="one">
+        <span class="profile"><img
+                src="https://raw.githubusercontent.com/MintZzz1009/team-introduction/kbs/20221116_flower.jpg"
+                width="550px;" height="550px" alt=""/></span>
+              <h3 class><strong> 간단 자기 소개 </strong><br><br>
+                좋아하는 것 : 축구보기, 소설책 읽기 , 커피
+                <br>
+                싫어하는 것 : 오이
+                <br>
+                관심있는 분야 : 정보보안, ai분야
+                <br>
+                </h3>
+
         </div>
+    </div>
+
+    <div class="list">
+        <div class="two">
+                <div class="mypost">
+                     <div class="form-floating mb-3">
+                     <input type="text" class="form-control" id="name" placeholder="url">
+                     <label for="floatingInput">닉네임</label>
+                     </div>
+                <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                          style="height: 100px"></textarea>
+                 <label for="floatingTextarea2">응원댓글</label>
+                 </div>
         <button onclick="save_comment()" type="button" class="btn btn-dark">응원 남기기</button>
-    </div>
-    <div class="mycards" id="comment-list">
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
+                 </div>
         </div>
     </div>
+
+
+
+
+</div>
+
+
 </body>
 </html>
