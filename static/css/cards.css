@@ -1,0 +1,84 @@
+.card {
+  width: 350px;
+  height: 350px;
+  perspective: 1100px;
+  position: relative;
+  margin: 10px;
+  transition: 0.4s;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 15px black, inset 0px 0px 10px rgba(0, 0, 0, 1);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.front {
+  background: teal;
+  backface-visibility: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.back {
+  backface-visibility: hidden;
+  background: white;
+  transform: rotateY(180deg);
+}
+
+.rotateCard {
+  transition: transform 0.5s ease-in-out;
+}
+
+.back p {
+  padding: 30px;
+  font-size: 20px;
+}
+
+#info1 {
+  height: 650px;
+}
+#info1 div.front {
+  background-image: url("../img/1.jpg");
+}
+
+#info2 {
+  height: 250px;
+}
+#info2 div.front {
+  background-image: url("#");
+}
+
+#info3 {
+  height: 550px;
+}
+#info3 div.front {
+  background-image: url("#");
+}
+
+#info4 {
+  height: 470px;
+}
+#info4 div.front {
+  background-image: url("#");
+}
+
+#info5 {
+  height: 300px;
+}
+#info5 div.front {
+  background-image: url("#");
+}
+
+#info6 {
+  height: 500px;
+}
+#info6 div.front {
+  background-image: url("#");
+}
