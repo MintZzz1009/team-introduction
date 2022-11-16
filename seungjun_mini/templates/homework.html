@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>소개 페이지</title>
+
+    <style>
+        body {
+            background-image: URL("https://cdn.pixabay.com/photo/2018/11/17/07/10/notebook-3820634_960_720.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+
+        h4 {
+            font-weight: bold;
+            text-align: left;
+            font-style: italic;
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+
+        .mytitle {
+            margin-top: 40px;
+            text-align: left;
+            font-style: italic;
+            font-weight: lighter;
+        }
+
+
+        .mycomment {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .mycomment > button {
+
+            margin-top: 15px;
+            float: right;
+        }
+
+        .mycards {
+            width: 95%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+
+        img{
+            margin: 0px 20px 0px 0px;
+            float: left;
+        }
+        .mycards {
+            width: 90%;
+            max-width: 800px;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            show_comment();
+        });
+
+        function save_comment() {
+            let name = $('#name').val()
+            let comment = $('#comment').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/homework",
+                data: {'name_give': name, 'comment_give': comment},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function show_comment() {
+            $('#comment-list').empty()
+            $.ajax({
+                type: "GET",
+                url: "/homework",
+                data: {},
+                success: function (response) {
+                    let rows = response['comments']
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['name']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="card">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                    <p>${comment}</p>
+                                                    <footer class="blockquote-footer">${name}</footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>`
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="mytitle">
+    <img src="https://ca.slack-edge.com/T043597JK8V-U046Z80DKH7-dc8aa4813e03-512" width="300" height="300">
+    <h1>"나"를 소개합니다.</h1>
+    </br>
+    <h4>
+        안녕하세요 저는 NODE.JS B반 이승준입니다.</br>
+        취미는 농구를 포함한 운동을 좋아하며 MBTI는 ISTJ 입니다.<br>
+        저는 인내심있고 시간관념이 철저한게 저의 장점이라생각하며,<br>
+        협업에서 이러한 장점을 살려 원할하게 프로젝트를 수행 할 수 있도록 노력해보겠습니다.<br><br>
+
+    </h4>
+
+</div>
+
+
+<div class="mycomment">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="url">
+        <label for="floatingInput">이름</label>
+    </div>
+    <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                      style="height: 100px"></textarea>
+        <label for="floatingTextarea2">내용</label>
+    </div>
+    <button onclick="save_comment()" type="button" class="btn btn-dark">댓글 남기기</button>
+</div>
+
+<div class="mycards" id="comment-list">
+
+</div>
+
+</body>
+</html>
