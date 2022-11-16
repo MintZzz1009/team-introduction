@@ -83,6 +83,25 @@
             font-family: 'Roboto Slab', serif;
         }
 
+        /* footer */
+
+        #wrap {
+            min-height: 100vh;
+            position: relative;
+            width: 100%;
+        }
+
+        footer {
+            width: 100%;
+            height: 110px;
+            bottom: 0px;
+            position: absolute;
+            border-top: 1px solid #c4c4c4;
+            padding-top: 15px;
+            color: #808080;
+            font-size: 11px;
+        }
+
         #container {
             width: 100%;
             height: 100vh;
@@ -100,6 +119,7 @@
             align-items: center;
             scroll-snap-align: center;
         }
+
         /* scroll coding */
 
         /* .list:nth-child(1){
@@ -164,22 +184,12 @@
             padding: 20px;
         }
 
+
     </style>
+
     <script>
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "http://spartacodingclub.shop/sparta_api/weather/gwangju",
-                data: {},
-                success: function (response) {
-                    let url = response['url']
-                    $('#temp').text(response['temp'])
-                    $('#icon').attr('src',url)
-                    $('#clouds').text(response['clouds'])
-                }
-            })
-        });
     </script>
+
 </head>
 <body>
 <div id="container">
@@ -191,7 +201,11 @@
         <span class="profile"><img
                 src="https://raw.githubusercontent.com/MintZzz1009/team-introduction/6c38c49c60e8222721d3ff963ea42a0193bc556a/202211_me.jpg"
                 width="550px;" height="550px" alt=""/></span>
-            <h3><strong> 풀스택 개발자가 되고 싶은 김범석 입니다. </strong> <br> 함께 열심히 해봐요~ </h3>
+            <h3><strong> 풀스택 개발자가 되고 싶은 김범석 입니다. </strong> <br><br>
+                저는 협업을 할 때 팀원들이 잘 소통할 수 있도록 나서서 하는 스타일입니다. <br>
+                그래서 최대한 팀원들과 함께 하려고 하는 것 같아요~
+            </h3>
+
         </div>
     </div>
     <div class="list">
@@ -200,16 +214,16 @@
                 src="https://raw.githubusercontent.com/MintZzz1009/team-introduction/kbs/20221116_flower.jpg"
                 width="550px;" height="550px" alt=""/></span>
             <h3 class><strong> 간단 자기 소개 </strong><br><br>
-                좋아하는 것 : 축구보기, 소설책 읽기 , 커피
+                <p>mbti : ISFJ</p>
+                제 mbti는 E랑 I가 왔다갔다 합니다.<br>
+                요즘은 내향적인 성향이 많이 올라오는 것 같아요.<br>
+                평소 조용하지만 또 할 떄는 하려고 합니다.<br>
                 <br>
-                싫어하는 것 : 오이
+                <p>장점</p>
+                저의 장점은 꼼꼼함과 책임감 입니다.<br>
+                또 문제가 있으면 바로 해결하려는 스타일입니다.
                 <br>
-                관심있는 분야 : 정보보안, ai분야
                 <br>
-                <br>
-                <p>현재기온: <span id="temp"oo.o도</span>도 </p>
-                <p>날씨: <img id="icon" src="https://openweathermap.org/img/w/01d.png"> </p>
-                <p>clouds: <span id="clouds" 00% </span>% </p>
             </h3>
 
         </div>
@@ -234,19 +248,20 @@
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
                             <p>새로운 앨범 너무 멋져요!</p>
-                            <footer class="blockquote-footer">호빵맨</footer>
+                            <span class="blockquote-footer">호빵맨</span>
                         </blockquote>
                     </div>
                 </div>
             </div>
+
+
         </div>
+        <a href="https://stone96.tistory.com/" class="ct">Blog</a>
+        <a href="https://github.com/St0ne96" class="ct">Github</a>
 
-    </div>
-
-
-
-</div>
+         </div>
 
 
 </body>
+
 </html>
