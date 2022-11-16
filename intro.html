@@ -56,7 +56,7 @@
         }
 
 
-        /* page 3 */
+        /* page 2 */
         .two {
             text-align: center;
             align-items: center;
@@ -82,7 +82,8 @@
             overflow: hidden;
             font-family: 'Roboto Slab', serif;
         }
-  #container {
+
+        #container {
             width: 100%;
             height: 100vh;
             overflow: auto;
@@ -147,6 +148,22 @@
             margin-top: 15px;
         }
 
+        .mycards {
+            width: 95%;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .mycards > .card {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            box-shadow: 0px 0px 3px 0px black;
+            padding: 20px;
+        }
+
+
+
 
     </style>
 </head>
@@ -168,35 +185,45 @@
         <span class="profile"><img
                 src="https://raw.githubusercontent.com/MintZzz1009/team-introduction/kbs/20221116_flower.jpg"
                 width="550px;" height="550px" alt=""/></span>
-              <h3 class><strong> 간단 자기 소개 </strong><br><br>
+            <h3 class><strong> 간단 자기 소개 </strong><br><br>
                 좋아하는 것 : 축구보기, 소설책 읽기 , 커피
                 <br>
                 싫어하는 것 : 오이
                 <br>
                 관심있는 분야 : 정보보안, ai분야
                 <br>
-                </h3>
+            </h3>
 
         </div>
     </div>
 
     <div class="list">
         <div class="two">
-                <div class="mypost">
-                     <div class="form-floating mb-3">
-                     <input type="text" class="form-control" id="name" placeholder="url">
-                     <label for="floatingInput">닉네임</label>
-                     </div>
+            <div class="mypost">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="url">
+                    <label for="floatingInput">닉네임</label>
+                </div>
                 <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" id="comment"
                           style="height: 100px"></textarea>
-                 <label for="floatingTextarea2">응원댓글</label>
-                 </div>
-        <button onclick="save_comment()" type="button" class="btn btn-dark">응원 남기기</button>
-                 </div>
+                    <label for="floatingTextarea2">응원댓글</label>
+                </div>
+                <button onclick="save_comment()" type="button" class="btn btn-dark">댓글 남기기</button>
+            </div>
+            <div class="mycards" id="comment-list">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>새로운 앨범 너무 멋져요!</p>
+                            <footer class="blockquote-footer">호빵맨</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
+    </div>
 
 
 
