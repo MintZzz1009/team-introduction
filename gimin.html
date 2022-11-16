@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>스파르타 피디아</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        font-family: "Jua", sans-serif;
+      }
+
+      .title {
+        width: 100%;
+        height: 100px;
+
+        background-color: white;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-bottom: 30px;
+      }
+
+      .me {
+        /* height: 800px; */
+        height: 500px; /*추가*/
+        padding: 20px 0px; /*추가*/
+        background-color: #809ead;
+        min-width: 1000px;
+      }
+
+      .pro {
+        width: 400px;
+        height: 500px;
+        float: left;
+
+        border-radius: 100px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin-left: 100px;
+      }
+
+      .img {
+        background-image: url("https://i.pinimg.com/564x/f2/e0/3e/f2e03e62272219b903af8c8e5e1ab7e9.jpg");
+        background-position: center;
+        background-size: cover;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+      }
+
+      .content {
+        width: 400px;
+        /* height: 500px; */
+        height: 460px; /*추가*/
+
+        float: right;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+
+        /* margin-right: 50px; */
+        margin-right: 20px; /*추가*/
+        padding: 20px; /*추가*/
+
+        overflow-y: scroll; /*추가*/
+      }
+
+      /*추가*/
+      .content::-webkit-scrollbar {
+        width: 5px; /* 스크롤바의 너비 */
+      }
+
+      .content::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #666; /* 스크롤바의 색상 */
+        border-radius: 10px;
+      }
+
+      .content::-webkit-scrollbar-track {
+        background: transparent; /*스크롤바 뒷 배경 색상*/
+      }
+      /*여기까지*/
+
+      .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /*추가*/
+      .menu:first-child {
+        margin-top: auto;
+      }
+      .menu:nth-child(5) {
+        margin-bottom: auto;
+      }
+      /*여기까지*/
+
+      .menu > button {
+        width: 200px;
+        height: 50px;
+
+        background-color: transparent;
+        color: black;
+
+        border-radius: 50px;
+        border: 2px solid black;
+
+        margin-top: 40px;
+      }
+
+      .menu > button:hover {
+        border: 3px solid gray;
+      }
+
+      .mypost {
+        width: 95%;
+        max-width: 500px;
+        margin: 20px auto 0px auto;
+        padding: 20px;
+        box-shadow: 0px 0px 3px 0px gray;
+
+        display: none;
+      }
+
+      .mybtns {
+        /*닫기*/
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 20px;
+      }
+
+      .mybtns > button {
+        margin-right: 10px;
+      }
+
+      .name {
+        width: 200px;
+        height: 500px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .guest {
+        background-color: red;
+        width: 100%;
+        height: 300px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 100px;
+      }
+
+      .velog {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 100px;
+      }
+    </style>
+    <script>
+      // MBTI
+      function open_box() {
+        $("#MBTI").show();
+      }
+
+      function close_box() {
+        $("#MBTI").hide();
+      }
+
+      //strength
+      function open_box1() {
+        $("#strength").show();
+      }
+
+      function close_box1() {
+        $("#strength").hide();
+      }
+
+      //cooperation
+      function open_box2() {
+        $("#cooperation").show();
+      }
+
+      function close_box2() {
+        $("#cooperation").hide();
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="title"></div>
+
+    <div class="me">
+      <div class="pro">
+        <div class="img"></div>
+        <div class="name">
+          <p class="mini-title">
+            이름: 김기민 <br />
+            나이: 27 <br />
+            email: ggm4954@gmail.com
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="menu">
+          <button onclick="open_box()">MBTI</button>
+        </div>
+        <div class="mypost" id="MBTI">
+          <div>
+            오늘의 mbti는
+            <input type="text" style="width: 40px" />
+            입니다<br />
+            저의 mbti는 자주 바뀌는 편입니다<br />
+            하지만 i와 j는 절대 변하지 않는 사실에 꽤나 놀라웠어요<br />
+            심리 퀴즈 같은 것들은 절대 안 믿지 않았었는데 mbti 만큼은 신뢰가
+            가더라고요<br />
+            i인 만큼 집순이고 j인 만큼 파워 계획형 인간입니다<br />
+            계획이 정리가 안되면 하루를 시작하지 못하는 편이에요:)<br />
+            심지어 집에서 뒹굴뒹굴하는 것 또한 계획한답니다.<br />
+          </div>
+          <div class="mybtns">
+            <button
+              onclick="close_box()"
+              type="button"
+              class="btn btn-outline-dark"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button onclick="open_box1()">장점</button>
+        </div>
+        <div class="mypost" id="strength">
+          <div>
+            제 장점은 계획을 세우고 실천하는 것을 좋아해요<br />
+            그리고 책임감이 강해 한 번 맡은 일은 끝까지 해낸다는 장점을 가지고
+            있어요💪🏻
+          </div>
+          <div class="mybtns">
+            <button
+              onclick="close_box1()"
+              type="button"
+              class="btn btn-outline-dark"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button onclick="open_box2()">협업 스타일</button>
+        </div>
+        <div class="mypost" id="cooperation">
+          <div>
+            제 의견을 말한 뒤 모든 사람들의 동의 여부를 다 물어보는 편이에요.<br />
+            다른 의견 또한 꼭 들어본답니다.<br />
+            가끔 의견 충돌이 있을 땐 그 의견 차이를 좁혀나가려는 편이에요.<br />
+          </div>
+          <div class="mybtns">
+            <button
+              onclick="close_box2()"
+              type="button"
+              class="btn btn-outline-dark"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guest">방명록</div>
+
+    <footer class="velog">
+      <a href="https://velog.io/@jn2o_o2">
+        <img
+          src="https://velog.velcdn.com/images/velog/profile/9aa07f66-5fcd-41f4-84f2-91d73afcec28/green%20favicon.png"
+          style="height: 40px; width: 40px"
+        />
+      </a>
+    </footer>
+  </body>
+</html>
