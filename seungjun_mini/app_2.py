@@ -20,27 +20,12 @@ def homework_post():
     }
 
     db.homework.insert_one(doc)
-    return jsonify({'msg':'작성 완료!'})
-
-
+    return jsonify({'msg':'작성완료'})
 
 @app.route("/homework", methods=["GET"])
 def homework_get():
     comment_list = list(db.homework.find({},{'_id':False}))
     return jsonify({'comments':comment_list})
-
-@@app.route("/homework", methods=["POST"])
-def homework_post():
-    name_receive = request.form["name_give"]
-    comment_receive = request.form["comment_give"]
-
-    doc = {
-        'name': name_receive,
-        'comment': comment_receive
-    }
-
-    db.users.delete_one({doc})
-    return jsonify({'msg':'삭제완료'})
 
 
 if __name__ == '__main__':

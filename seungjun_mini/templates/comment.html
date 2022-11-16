@@ -62,7 +62,7 @@
         }
 
         function show_comment() {
-            $('#comment-list').empty()
+
             $.ajax({
                 type: "GET",
                 url: "/homework",
@@ -103,7 +103,7 @@
                 });
             }
             alert(response["msg"])
-        }
+
         }
     </script>
 </head>
@@ -136,4 +136,5 @@
 </div>
 
 </body>
+
 </html>
