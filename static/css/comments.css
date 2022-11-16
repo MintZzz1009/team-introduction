@@ -31,14 +31,7 @@ footer.from-who {
 
 footer.from-who::before {
   content: "from. ";
-  color: rgba(0,0,0,0.5);
+  color: rgba(0, 0, 0, 0.5);
   font-size: 15px;
   padding-right: 5px;
 }
-
-
-/* 
-.comment-list > .card {
-  margin-top: 10px;
-  margin-bottom: 10px;
-} */
