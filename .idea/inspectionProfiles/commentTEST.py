@@ -22,8 +22,6 @@ def save_comment():
     num2 = random.randint(1, 255)
     num3 = random.randint(1, 255)
 
-
-
     doc = {
         'num1': num1,
         'num2': num2,

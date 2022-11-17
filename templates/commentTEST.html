@@ -79,19 +79,6 @@
       "
     >
       <h2>API 실험공간</h2>
-      <li id="li-54">
-        <h2>목록1</h2>
-        <button
-          onclick="addInput(54)"
-          type="button"
-          class="btn btn-outline-primary"
-        >
-          수정!
-        </button>
-        <button onclick="" type="button" class="btn btn-outline-primary">
-          삭제!
-        </button>
-      </li>
     </div>
     <script>
       $(document).ready(function () {
@@ -129,7 +116,7 @@
               let num3 = rows[i]["num3"];
               console.log(typeof num1);
               console.log(num1);
-              let temp_html = `<li id="li-${num1}">
+              let temp_html = `<li id="li-${num1}-${num2}-${num3}">
                                             <h2>${comment}</h2><span>${name}</span>
                                             <button onclick="addInput(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">수정!</button>
                                             <button onclick="remove(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">삭제!</button>
@@ -143,22 +130,24 @@
       // 수정을 위한 input창 열기
       function addInput(num1, num2, num3) {
         console.log(num1);
-        let li = $(`#li-${num1}`);
+        let li = $(`#li-${num1}-${num2}-${num3}`);
         console.log(li);
-        let wanna_edit = $(`#li-${num1} > h2`).text();
+        let wanna_edit = $(`#li-${num1}-${num2}-${num3} > h2`).text();
         console.log(wanna_edit);
         li.empty();
         li.append($("<input/>", { type: "text", value: wanna_edit }));
         li.append($("<button >수정완료!</button>"));
 
-        $(`#li-${num1} > button`).click(function () {
+        $(`#li-${num1}-${num2}-${num3} > button`).click(function () {
           save(num1, num2, num3);
         });
       }
 
       // 수정완료! 버튼 클릭시 이벤트리스너
       function save(num1, num2, num3) {
-        let edit_done = $(`#li-${num1} > input[type=text]`).val();
+        let edit_done = $(
+          `#li-${num1}-${num2}-${num3} > input[type=text]`
+        ).val();
 
         console.log(num1, edit_done);
         $.ajax({
