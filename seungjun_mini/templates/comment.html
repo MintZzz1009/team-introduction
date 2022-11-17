@@ -46,7 +46,6 @@
         function save_comment() {
             let name = $('#name').val()
             let comment = $('#comment').val()
-
             $.ajax({
                 type: "POST",
                 url: "/homework",
@@ -69,36 +68,41 @@
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
+                        let num = rows[i]['num']
+                        let done = rows[i]['done']
+                        let temp_html = ``
 
+                        if (done == 0) {
+                            temp_html = `<div class="card">
+                                         <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>${comment}</p>
+                                            <footer class="blockquote-footer">${name}</footer>
 
-                        let temp_html = `<div class="card">
-                                            <div class="card-body">
-                                                <blockquote class="blockquote mb-0">
-                                                    <p>${comment}</p>
-                                                    <footer class="blockquote-footer">${name}</footer>
-                                                     <button type="button" class="btn btn-link">수정</button>
-                <button onclick="delete_comment('${name}')" type="button" class="btn btn-link">삭제</button>
-                                                </blockquote>
-                                            </div>
-                                        </div>`
+                                            <button onclick="delete_comment(${num})" type="button" class="btn btn-link">삭제</button>
+                                             </blockquote>
+                                              </div>
+                                              </div>`
+                        } else {
+                            temp_html = ``
+                        }
                         $('#comment-list').append(temp_html)
                     }
                 }
             });
         }
 
-        function delete_comment(name) {
+        function delete_comment(num) {
             $.ajax({
-                type: 'POST',
-                url: '/homework/delete',
-                data: {name_give: name},
+                type: "POST",
+                url: "/homework/delete",
+                data: {num_give: num},
                 success: function (response) {
-                    alert(response['msg']);
+                    alert(response["msg"])
                     window.location.reload()
                 }
             });
         }
-
     </script>
 </head>
 <body><h4>댓글창</h4>

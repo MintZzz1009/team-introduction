@@ -18,9 +18,14 @@ def homework_post():
     name_receive = request.form["name_give"]
     comment_receive = request.form["comment_give"]
 
+    comment_list = list(db.homework.find({}, {'_id': False}))
+    count = len(comment_list) + 1
+
     doc = {
+        'num':count,
         'name': name_receive,
         'comment': comment_receive,
+        'done': 0
     }
 
     db.homework.insert_one(doc)
@@ -33,8 +38,8 @@ def homework_get():
 
 @app.route('/homework/delete', methods=['POST'])
 def homework_delete():
-    name_receive = request.form['name_give']
-    db.homework.delete_one({'name': name_receive})
+    num_receive = request.form['num_give']
+    db.homework.update_one({'num': int(num_receive)},{'$set':{'done':1}})
     return jsonify({'msg': '삭제 완료!'})
 
 

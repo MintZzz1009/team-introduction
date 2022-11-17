@@ -38,6 +38,7 @@
 
 
         .mytitle {
+            margin-bottom: 40px;
             margin-top: 40px;
             text-align: left;
             font-style: italic;
@@ -64,13 +65,17 @@
         }
 
 
-        img{
+        img {
             margin: 0px 20px 0px 0px;
             float: left;
         }
+
         .mycards {
             width: 90%;
             max-width: 800px;
+        }
+        p {
+            font-size: 18px;
         }
 
     </style>
@@ -125,16 +130,22 @@
 <body>
 
 <div class="mytitle">
-    <img src="https://ca.slack-edge.com/T043597JK8V-U046Z80DKH7-dc8aa4813e03-512" width="300" height="300">
-    <h1>"나"를 소개합니다.</h1>
-    </br>
-    <h4>
-        안녕하세요 저는 NODE.JS B반 이승준입니다.</br>
-        취미는 농구를 포함한 운동을 좋아하며 MBTI는 ISTJ 입니다.<br>
-        저는 인내심있고 시간관념이 철저한게 저의 장점이라생각하며,<br>
-        협업에서 이러한 장점을 살려 원할하게 프로젝트를 수행 할 수 있도록 노력해보겠습니다.<br><br>
+  <div class="card mb-3" style="max-width: 800px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://ca.slack-edge.com/T043597JK8V-U046Z80DKH7-dc8aa4813e03-512" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">이름 : 이승준</h5>
+        <p class="card-text">나이:28<br>취미:농구,운동,게임!<br>MBTI:ISTJ <br> 장점:인내심,시간개념확고
+        <br>협업을 하는 과정에서의 자신의 스타일:<br>부족하지만 자신의 장점을 살려 끝까지 최선을 다하는 모습!</p>
 
-    </h4>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
