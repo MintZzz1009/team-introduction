@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>소개 페이지</title>
+
+    <style>
+        body {
+            background-image: URL("https://cdn.pixabay.com/photo/2018/11/17/07/10/notebook-3820634_960_720.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+
+
+        .mytitle {
+            margin-bottom: 40px;
+            margin-top: 40px;
+            text-align: left;
+            font-style: italic;
+            font-weight: lighter;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            width: 850px;
+        }
+
+
+        .mycomment {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .mycomment > button {
+
+            margin-top: 15px;
+            float: right;
+        }
+
+        .mycards {
+            width: 95%;
+            max-width: 800px;
+            margin-bottom: 100px;
+        }
+
+        LI {
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: bold;
+
+        }
+
+        h4 {
+            font-weight: bold;
+        }
+        .card{
+            margin-bottom: 30px;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            show_comment();
+        });
+
+        function save_comment() {
+            let name = $('#name').val()
+            let comment = $('#comment').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/homework",
+                data: {'name_give': name, 'comment_give': comment},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function show_comment() {
+            $('#comment-list').empty()
+            $.ajax({
+                type: "GET",
+                url: "/homework",
+                data: {},
+                success: function (response) {
+                    let rows = response['comments']
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['name']
+                        let comment = rows[i]['comment']
+                        let num = rows[i]['num']
+                        let done = rows[i]['done']
+                        let temp_html = ``
+
+                        if (done == 0) {
+                            temp_html = `<div class="card">
+                                         <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>${comment}</p>
+                                            <footer class="blockquote-footer">${name}</footer>
+
+                                            <button onclick="delete_comment(${num})" type="button" class="btn btn-link">삭제</button>
+                                             </blockquote>
+                                              </div>
+                                              </div>`
+                        } else {
+                            temp_html = ``
+                        }
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function delete_comment(num) {
+            $.ajax({
+                type: "POST",
+                url: "/homework/delete",
+                data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="mytitle">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://ca.slack-edge.com/T043597JK8V-U046Z80DKH7-dc8aa4813e03-512"
+                     class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title">이름 : 이승준</h4>
+                    <p></p>
+                    <ul>
+                        <li>취미 : 운동 , 농구 , 게임</li>
+                        <p></p>
+                        <li>MBTI : ISTJ</li>
+                        <p></p>
+                        <li>장점 : 인내심있고 시간을 소중히 여김</li>
+                        <p></p>
+                        <li>협업을 하는 과정에서의 자신의 스타일 : <p></p>
+                            <p></p>부족하지만 자신의 장점을 살려 협업에서 원할한 진행을 할 수 있도록 노력
+                        </li>
+                    </ul>
+
+
+                    <p class="card-text"><small class="text-muted"></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="mycomment">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="url">
+        <label for="floatingInput">이름</label>
+    </div>
+    <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                      style="height: 100px"></textarea>
+        <label for="floatingTextarea2">내용</label>
+    </div>
+    <button onclick="save_comment()" type="button" class="btn btn-dark">댓글 남기기</button>
+</div>
+
+<div class="mycards" id="comment-list">
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
+            </blockquote>
+        </div>
+    </div>
+
+     <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
+            </blockquote>
+        </div>
+    </div>
+
+     <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
+            </blockquote>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
