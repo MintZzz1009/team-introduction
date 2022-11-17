@@ -5,6 +5,8 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://test:sparta@cluster0.gslmzb6.mongodb.net/?retryWrites=true&w=majority')
 db = client.dbsparta
 
+from bson.objectid import ObjectId
+
 @app.route('/')
 def home():
     return render_template('haksoo.html')

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Document</title>
+    <script></script>
+  </head>
+  <body>
+    <div class="mypic">
+      <h1>나의 버킷리스트</h1>
+    </div>
+    <div class="mybox">
+      <div class="mybucket">
+        <input
+          id="bucket"
+          class="form-control"
+          type="text"
+          placeholder="이루고 싶은 것을 입력하세요"
+        />
+        <button
+          onclick="save_bucket()"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          기록하기
+        </button>
+      </div>
+    </div>
+    <div class="mybox" id="bucket-list">
+      <li>
+        <h2>✅ ${bucket}</h2>
+        <button
+          onclick="edit_get(${id})"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          완료!
+        </button>
+      </li>
+    </div>
+    <div
+      style="
+        width: fit-content;
+        padding: 20px;
+        margin: 20px auto;
+        border: 3px solid royalblue;
+      "
+    >
+      <h2>API 실험공간</h2>
+      <input id="name" type="text" placeholder="name" />
+      <input id="comment" type="text" placeholder="comment" />
+      <button
+        onclick="save_comment()"
+        type="button"
+        class="btn btn-outline-primary"
+      >
+        수정하기
+      </button>
+    </div>
+    <div
+      id="comment_list"
+      style="
+        width: fit-content;
+        padding: 20px;
+        margin: 20px auto;
+        border: 3px solid royalblue;
+      "
+    >
+      <h2>API 실험공간</h2>
+      <li id="li-54">
+        <h2>목록1</h2>
+        <button
+          onclick="addInput(54)"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          수정!
+        </button>
+        <button onclick="" type="button" class="btn btn-outline-primary">
+          삭제!
+        </button>
+      </li>
+    </div>
+    <script>
+      $(document).ready(function () {
+        show_comment();
+      });
+
+      function save_comment() {
+        let name = $("#name").val();
+        let comment = $("#comment").val();
+
+        $.ajax({
+          type: "POST",
+          url: "/test",
+          data: { name_give: name, comment_give: comment },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+
+      function show_comment() {
+        $.ajax({
+          type: "GET",
+          url: "/test",
+          data: {},
+          success: function (response) {
+            console.log("댓글목록조회", response["tests"]);
+            let rows = response["tests"];
+            for (let i = 0; i < rows.length; i++) {
+              let name = rows[i]["name"];
+              let comment = rows[i]["comment"];
+              let num1 = rows[i]["num1"];
+              let num2 = rows[i]["num2"];
+              let num3 = rows[i]["num3"];
+              console.log(typeof num1);
+              console.log(num1);
+              let temp_html = `<li id="li-${num1}">
+                                            <h2>${comment}</h2><span>${name}</span>
+                                            <button onclick="addInput(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">수정!</button>
+                                            <button onclick="remove(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">삭제!</button>
+                                        </li>`;
+              $("#comment_list").append(temp_html);
+            }
+          },
+        });
+      }
+
+      // 수정을 위한 input창 열기
+      function addInput(num1, num2, num3) {
+        console.log(num1);
+        let li = $(`#li-${num1}`);
+        console.log(li);
+        let wanna_edit = $(`#li-${num1} > h2`).text();
+        console.log(wanna_edit);
+        li.empty();
+        li.append($("<input/>", { type: "text", value: wanna_edit }));
+        li.append($("<button >수정완료!</button>"));
+
+        $(`#li-${num1} > button`).click(function () {
+          save(num1, num2, num3);
+        });
+      }
+
+      // 수정완료! 버튼 클릭시 이벤트리스너
+      function save(num1, num2, num3) {
+        let edit_done = $(`#li-${num1} > input[type=text]`).val();
+
+        console.log(num1, edit_done);
+        $.ajax({
+          type: "POST",
+          url: "/test/edit",
+          data: {
+            edit_give: edit_done,
+            num1_give: num1,
+            num2_give: num2,
+            num3_give: num3,
+          },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+
+      function remove(num1, num2, num3) {
+        $.ajax({
+          type: "POST",
+          url: "/test/remove",
+          data: { num1_give: num1, num2_give: num2, num3_give: num3 },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
