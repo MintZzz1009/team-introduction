@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Stylish&display=swap");
+
+* {
+  font-family: "Jua", sans-serif;
+}
+
 main {
   background-color: rosybrown;
 }
@@ -54,7 +60,7 @@ header {
 }
 
 .team__introduction {
-  height: 60%;
+  min-height: 55%;
   padding: 2vw;
   box-shadow: 2px 2px 10px black;
   border-radius: 15px;
@@ -62,7 +68,13 @@ header {
 }
 
 .team__introduction > h1 {
+  padding: 10px 0px;
   margin: 0;
+  margin-bottom: 10px;
+}
+
+.team__introduction span {
+  color: #f0365b;
 }
 
 .team__members {
@@ -99,19 +111,68 @@ header {
 }
 
 .team__weather {
-  height: 30%;
+  height: 35%;
+  padding: 2vw;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px black;
+  background-color: white;
+}
+.team__weather h4 {
+  font-size: 32px;
+  padding: 10px 0px;
+  margin-bottom: 15px;
+}
+
+.team__weather__world {
+  display: flex;
+}
+
+.team__weather__world__search {
+  display: flex;
+  max-height: 32px;
+}
+.team__weather__world__search input {
+  width: 9vw;
+
+  padding: 2px 5px;
+  border: 2px solid #f0365b;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.team__weather__world__search button {
+  background-color: #f0365b;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.team__weather__world__search i {
+  color: white;
+}
+
+.team__weather__world__output {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.team__weather__world__output h6 {
+  margin: 0px;
+  margin-left: 2vw;
+}
+
+.team__promise {
+  height: 60%;
   padding: 2vw;
   border-radius: 15px;
   box-shadow: 2px 2px 10px black;
   background-color: white;
 }
 
-.team__promise {
-  height: 65%;
-  padding: 2vw;
-  border-radius: 15px;
-  box-shadow: 2px 2px 10px black;
-  background-color: white;
+.team__promise h3 {
+  font-size: 32px;
+  padding: 10px 0px;
+  margin-bottom: 10px;
 }
 
 .team__comments {

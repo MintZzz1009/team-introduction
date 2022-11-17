@@ -16,6 +16,89 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://kit.fontawesome.com/ec13307674.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        show_comment();
+      });
+
+      function save_comment() {
+        let name = $("#name").val();
+        let comment = $("#comment").val();
+        $.ajax({
+          type: "POST",
+          url: "/homework",
+          data: { name_give: name, comment_give: comment },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+
+      function show_comment() {
+        $("#comment-list").empty();
+        $.ajax({
+          type: "GET",
+          url: "/homework",
+          data: {},
+          success: function (response) {
+            let rows = response["comments"];
+            for (let i = 0; i < rows.length; i++) {
+              let name = rows[i]["name"];
+              let comment = rows[i]["comment"];
+              let num = rows[i]["num"];
+              let done = rows[i]["done"];
+              let temp_html = ``;
+
+              if (done == 0) {
+                temp_html = `<div class="card">
+                                         <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>${comment}</p>
+                                            <footer class="blockquote-footer">${name}</footer>
+                                            <button onclick="delete_comment(${num})" type="button" class="btn btn-link">삭제</button>
+                                             </blockquote>
+                                              </div>
+                                              </div>`;
+              } else {
+                temp_html = ``;
+              }
+              $("#comment-list").append(temp_html);
+            }
+          },
+        });
+      }
+
+      function delete_comment(num) {
+        $.ajax({
+          type: "POST",
+          url: "/homework/delete",
+          data: { num_give: num },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
+    </script>
+
+    <script>
+      function getWeather() {
+        let city = document.getElementById("city").value;
+        fetch("https://goweather.herokuapp.com/weather/" + city)
+          .then((response) => response.json())
+          .then((data) => {
+            (document.getElementById("temp").innerHTML = data["temperature"]),
+              (document.getElementById("desc").innerHTML = data["description"]);
+          });
+      }
+    </script>
+
     <title>코딩하고십조</title>
     <link rel="stylesheet" href="../static/css/team.css" />
   </head>
@@ -33,26 +116,78 @@
           <div class="team__introduction">
             <h1>코딩하고십조</h1>
             <p>
-              팀소개<br />Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Accusantium ipsam aliquid molestiae. In numquam facere illo
-              architecto distinctio, accusantium voluptatum ipsa similique
-              dolorum possimus beatae dolores nam, consequuntur harum voluptate.
+              저희는 이번 프로젝트에서 전 세계 나라들을 검색해
+              <span>날씨</span>를 확인할 수 있고 작성자의 이름과 글 한 줄로
+              <span>방명록</span>을 남길 수 있으며
+              <span>각 팀원들의 프로필</span>을 누르면 정확한 정보를 확인할 수
+              있는 페이지를 만들었습니다
+            </p>
+            <p>
+              팀 프로젝트를 하면서 역할을 나누긴 했었지만 첫
+              <span>협업</span> 프로젝트이다 보니 모르는 부분을 거의 같이
+              고민하고 해결하며 코드를 작성하였습니다
+            </p>
+            <p>
+              저희 팀의 <span>궁극적인 목표</span>는 완벽한 결과물보단 팀원들과
+              협업하는 방법을 깨우치고 개개인의 부족한 점을 정확히 깨달으며
+              공부의 방향성을 확실하게 잡는 게 저희의 목표입니다
             </p>
           </div>
           <div class="team__members">
+            <a href="/templates" class="team__members__avatar"></a>
+            <a href="/templates" class="team__members__avatar"></a>
             <a href="#" class="team__members__avatar"></a>
-            <a href="#" class="team__members__avatar"></a>
-            <a href="#" class="team__members__avatar"></a>
-            <a href="#" class="team__members__avatar"></a>
+            <a href="/templates" class="team__members__avatar"></a>
           </div>
         </div>
         <div class="team__contents-column">
-          <div class="team__weather">weather</div>
+          <div class="team__weather">
+            <h4>세계 도시 날씨</h4>
+            <div class="team__weather__world">
+              <div class="team__weather__world__search">
+                <input id="city" type="text" value="" list="depList" />
+                <datalist id="depList">
+                  <option value="seoul"></option>
+                  <option value="London"></option>
+                  <option value="algiers"></option>
+                  <option value="Luanda"></option>
+                  <option value="NewDelhi"></option>
+                  <option value="Manila"></option>
+                  <option value="moscow"></option>
+                  <option value="bangkok"></option>
+                  <option value="ankara"></option>
+                  <option value="hanoi"></option>
+                  <option value="paris"></option>
+                  <option value="berlin"></option>
+                  <option value="rome"></option>
+                  <option value="athens"></option>
+                  <option value="amsterdam"></option>
+                  <option value="oslo"></option>
+                  <option value="lisbon"></option>
+                  <option value="canberra"></option>
+                  <option value="brasilia"></option>
+                  <option value="paramaribo"></option>
+                  <option value="montevideo"></option>
+                  <option value="mexico city"></option>
+                </datalist>
+                <button onclick="getWeather()">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+              <div class="team__weather__world__output">
+                <h6 id="desc"></h6>
+                <h6 id="temp"></h6>
+              </div>
+            </div>
+          </div>
+
           <div class="team__promise">
-            promise<br />Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Sint error accusantium corporis dolor! Officia vero facilis
-            eius itaque, aperiam nemo asperiores repudiandae quaerat aliquid
-            laborum, esse quo ex ea ipsam?
+            <h3>Promise</h3>
+            <p>🤙 시간 약속 잘 지키기</p>
+            <p>🤙 자리를 비울 시 미리 말해주기</p>
+            <p>🤙 적극적으로 프로젝트에 참여하기</p>
+            <p>🤙 상대방이 모르는 부분은 잘 알려주기</p>
+            <p>🤙 문제가 있는 부분은 공유하기</p>
           </div>
         </div>
       </div>
@@ -75,10 +210,15 @@
               id="comment"
               style="height: 100px"
             ></textarea>
-            <label for="floatingTextarea2">응원댓글</label>
+            <label for="floatingTextarea2">댓글 남기기</label>
           </div>
           <button onclick="save_comment()" type="button" class="btn btn-dark">
-            응원 남기기
+            댓글 남기기
+          </button>
+
+          <button type="button" class="btn btn-dark">수정</button>
+          <button onclick="delete_comment()" type="button" class="btn btn-dark">
+            삭제
           </button>
         </div>
         <div id="comment-list">
