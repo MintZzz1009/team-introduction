@@ -10,11 +10,11 @@ db = client.dbsparta
 
 @app.route('/')
 def home():
-    return render_template('teamtest.html')
+    return render_template('index.html')
 
-@app.route('/templates')
-def templates():
-    return render_template('intro.html')
+@app.route('/templates/<username>')
+def get_templates(username):
+    return render_template(username)
 
 
 @app.route("/homework", methods=["POST"])
