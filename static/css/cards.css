@@ -1,5 +1,5 @@
 .card {
-  width: 350px;
+  width: 400px;
   height: 350px;
   perspective: 1100px;
   position: relative;
@@ -36,43 +36,94 @@
 }
 
 #info1 {
-  height: 650px;
+  height: 600px;
 }
 #info1 div.front {
-  background-image: url("../img/지학수.jpg");
+  background-image: url("../img/haksoo.jpg");
 }
 
 #info2 {
-  height: 250px;
+  height: 220px;
 }
 #info2 div.front {
-  background-image: url("#");
+  background-image: url("https://thumbs.dreamstime.com/b/generaci%C3%B3n-de-los-hombres-en-diversas-edades-del-beb%C3%A9-infantil-al-ejemplo-mayor-del-vector-del-viejo-hombre-77591440.jpg");
 }
 
 #info3 {
-  height: 550px;
+  height: 480px;
 }
 #info3 div.front {
-  background-image: url("#");
+  background-image: url("https://cdn-icons-png.flaticon.com/512/2344/2344031.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(135, 206, 250, 0.5);
 }
 
 #info4 {
-  height: 470px;
+  height: 400px;
 }
 #info4 div.front {
-  background-image: url("#");
+  background-image: url("https://cdn.imweb.me/thumbnail/20200415/6b6e035658bac.png");
 }
 
 #info5 {
-  height: 300px;
+  height: 260px;
 }
 #info5 div.front {
-  background-image: url("#");
+  background-image: url("https://d12zq4w4guyljn.cloudfront.net/750_750_20220523020921_photo2_c995f1553fc5.jpg");
 }
 
 #info6 {
-  height: 500px;
+  height: 480px;
 }
 #info6 div.front {
-  background-image: url("#");
+  background-image: url("https://img.lovepik.com/photo/50103/6193.jpg_wh860.jpg");
+}
+
+#info7 {
+  height: 200px;
+}
+#info7 div.front {
+  background-image: url("https://static.neris-assets.com/images/homepage/header-mountains-desktop.svg");
+}
+#info7 div.back {
+  padding-left: 30%;
+  background-image: url(https://static.neris-assets.com/images/personality-types/headers/analysts_Logician_INTP_personality_header.svg);
+  background-position: center;
+  background-size: cover;
+}
+
+#info8 {
+  height: 300px;
+}
+#info8 div.front {
+  background-image: url("https://t1.daumcdn.net/cfile/tistory/99D8EA33599C559218");
+}
+
+#info9 {
+  height: 220px;
+}
+#info9 div.front {
+  background-image: url("http://m.hrinsight.co.kr/ja_data/upload/intranet/hrinsight/images/86p(10).jpg");
+}
+
+#info10 {
+  height: 500px;
+}
+#info10 div.front {
+  background-image: url("https://www.wikihow.com/images_en/thumb/e/ea/Learn-a-Programming-Language-Step-2-Version-4.jpg/v4-460px-Learn-a-Programming-Language-Step-2-Version-4.jpg.webp");
+}
+
+#info11 {
+  height: 500px;
+}
+#info11 div.front {
+  background-image: url("");
+}
+
+#info12 {
+  height: 500px;
+}
+#info12 div.front {
+  background-image: url("");
 }
