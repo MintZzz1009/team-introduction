@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>세계 도시 날씨</h1>
+    <input id="city" type="text" value="" list="depList">
+        <datalist id="depList">
+            <option value="seoul"></option>
+            <option value="London"></option>
+            <option value="algiers"></option>
+            <option value="Luanda"></option>
+            <option value="NewDelhi"></option>
+            <option value="Manila"></option>
+            <option value="moscow"></option>
+            <option value="bangkok"></option>
+            <option value="ankara"></option>
+            <option value="hanoi"></option>
+            <option value="paris"></option>
+            <option value="berlin"></option>
+            <option value="rome"></option>
+            <option value="athens"></option>
+            <option value="amsterdam"></option>
+            <option value="oslo"></option>
+            <option value="lisbon"></option>
+            <option value="canberra"></option>
+            <option value="brasilia"></option>
+            <option value="paramaribo"></option>
+            <option value="montevideo"></option>
+            <option value="mexico city"></option>
+        </datalist>
+    <button onclick="getWeather()">날씨 가져오기</button>
+    <p id="temp"></p>
+    <p id="desc"></p>
+    <script>
+        function getWeather() {
+            let city = document.getElementById("city").value;
+            fetch('https://goweather.herokuapp.com/weather/' + city)
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById("temp").innerHTML = data['temperature'],
+                    document.getElementById("desc").innerHTML = data['description'];
+                });
+        }
+    </script>
+</body>
+</html>
