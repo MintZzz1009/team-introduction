@@ -72,7 +72,9 @@
         h4 {
             font-weight: bold;
         }
-
+        .card{
+            margin-bottom: 30px;
+        }
 
     </style>
     <script>
@@ -106,17 +108,38 @@
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
+                        let num = rows[i]['num']
+                        let done = rows[i]['done']
+                        let temp_html = ``
 
-                        let temp_html = `<div class="card">
-                                            <div class="card-body">
-                                                <blockquote class="blockquote mb-0">
-                                                    <p>${comment}</p>
-                                                    <footer class="blockquote-footer">${name}</footer>
-                                                </blockquote>
-                                            </div>
-                                        </div>`
+                        if (done == 0) {
+                            temp_html = `<div class="card">
+                                         <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>${comment}</p>
+                                            <footer class="blockquote-footer">${name}</footer>
+
+                                            <button onclick="delete_comment(${num})" type="button" class="btn btn-link">삭제</button>
+                                             </blockquote>
+                                              </div>
+                                              </div>`
+                        } else {
+                            temp_html = ``
+                        }
                         $('#comment-list').append(temp_html)
                     }
+                }
+            });
+        }
+
+        function delete_comment(num) {
+            $.ajax({
+                type: "POST",
+                url: "/homework/delete",
+                data: {num_give: num},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
                 }
             });
         }
@@ -175,8 +198,32 @@
     <div class="card">
         <div class="card-body">
             <blockquote class="blockquote mb-0">
-                <p>${comment}</p>
-                <footer class="blockquote-footer">${name}</footer>
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
+            </blockquote>
+        </div>
+    </div>
+
+     <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
+            </blockquote>
+        </div>
+    </div>
+
+     <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>내용</p>
+                <footer class="blockquote-footer">이름</footer>
+                <button type="button" class="btn btn-link">수정</button>
+                <button onclick="delete_comment()" type="button" class="btn btn-link">삭제</button>
             </blockquote>
         </div>
     </div>
