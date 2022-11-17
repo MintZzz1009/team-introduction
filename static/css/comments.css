@@ -1,0 +1,37 @@
+.mypost {
+  min-width: 500px;
+  margin: 20px 10px;
+  box-shadow: 2px 2px 10px black;
+  padding: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.mypost > button {
+  margin-top: 15px;
+}
+
+#comment-list {
+  min-width: 500px;
+  margin: 30px 10px 20px 10px;
+  padding: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 10px black;
+}
+
+.comments {
+  padding: 10px 20px;
+  margin: 0px auto 20px auto;
+  background-color: white;
+  border-radius: 10px;
+}
+
+footer.from-who {
+  text-align: right;
+}
+
+footer.from-who::before {
+  content: "from. ";
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  padding-right: 5px;
+}
