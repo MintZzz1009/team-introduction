@@ -188,7 +188,52 @@
     </style>
 
     <script>
+        $(document).ready(function () {
+            show_comment();
+        });
+
+        function save_comment() {
+            let name = $('#name').val()
+            let comment = $('#comment').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/beom",
+                data: {'name_give': name, 'comment_give': comment},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function show_comment() {
+            $('#comment-list').empty()
+            $.ajax({
+                type: "GET",
+                url: "/beom",
+                data: {},
+                success: function (response) {
+                    let rows = response['comments']
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['name']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="card">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                    <p>${comment}</p>
+                                                    <footer class="blockquote-footer">${name}</footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>`
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
     </script>
+
 
 </head>
 <body>
@@ -218,7 +263,6 @@
                 제 mbti는 E랑 I가 왔다갔다 합니다.<br>
                 요즘은 내향적인 성향이 많이 올라오는 것 같아요.<br>
                 평소 조용하지만 또 할 떄는 하려고 합니다.<br>
-                <br>
                 <p>장점</p>
                 저의 장점은 꼼꼼함과 책임감 입니다.<br>
                 또 문제가 있으면 바로 해결하려는 스타일입니다.
@@ -259,7 +303,7 @@
         <a href="https://stone96.tistory.com/" class="ct">Blog</a>
         <a href="https://github.com/St0ne96" class="ct">Github</a>
 
-         </div>
+    </div>
 
 
 </body>

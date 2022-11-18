@@ -18,71 +18,103 @@
     ></script>
 
 
-    <script>
+     <script>
       $(document).ready(function () {
         show_comment();
       });
 
       function save_comment() {
-        let name = $('#name').val()
-        let comment = $('#comment').val()
+        let name = $("#name").val();
+        let comment = $("#comment").val();
+
         $.ajax({
           type: "POST",
-          url: "/homework",
-          data: {'name_give': name, 'comment_give': comment},
+          url: "/test",
+          data: { name_give: name, comment_give: comment },
           success: function (response) {
-            alert(response["msg"])
-            window.location.reload()
-          }
+            alert(response["msg"]);
+            window.location.reload();
+          },
         });
       }
 
       function show_comment() {
-        $('#comment-list').empty()
         $.ajax({
           type: "GET",
-          url: "/homework",
+          url: "/test",
           data: {},
           success: function (response) {
-            let rows = response['comments']
+            console.log("댓글목록조회", response["tests"]);
+            let rows = response["tests"];
             for (let i = 0; i < rows.length; i++) {
-              let name = rows[i]['name']
-              let comment = rows[i]['comment']
-              let num = rows[i]['num']
-              let done = rows[i]['done']
-              let temp_html = ``
-
-              if (done == 0) {
-                temp_html = `<div class="card">
-                                         <div class="card-body">
-                                        <blockquote class="blockquote mb-0">
-                                            <p>${comment}</p>
-                                            <footer class="blockquote-footer">${name}</footer>
-                                            <button onclick="delete_comment(${num})" type="button" class="btn btn-link">삭제</button>
-                                             </blockquote>
-                                              </div>
-                                              </div>`
-              } else {
-                temp_html = ``
-              }
-              $('#comment-list').append(temp_html)
+              let name = rows[i]["name"];
+              let comment = rows[i]["comment"];
+              let num1 = rows[i]["num1"];
+              let num2 = rows[i]["num2"];
+              let num3 = rows[i]["num3"];
+              console.log(typeof num1);
+              console.log(num1);
+              let temp_html = `<li id="li-${num1}-${num2}-${num3}">
+                                            <h2>${comment}</h2><span>${name}</span>
+                                            <button onclick="addInput(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">수정</button>
+                                            <button onclick="remove(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">삭제</button>
+                                        </li>`;
+              $("#comment_list").append(temp_html);
             }
-          }
+          },
         });
       }
 
-      function delete_comment(num) {
+      // 수정을 위한 input창 열기
+      function addInput(num1, num2, num3) {
+        console.log(num1);
+        let li = $(`#li-${num1}-${num2}-${num3}`);
+        console.log(li);
+        let wanna_edit = $(`#li-${num1}-${num2}-${num3} > h2`).text();
+        console.log(wanna_edit);
+        li.empty();
+        li.append($("<input/>", { type: "text", value: wanna_edit }));
+        li.append($("<button >수정완료!</button>"));
+
+        $(`#li-${num1}-${num2}-${num3} > button`).click(function () {
+          save(num1, num2, num3);
+        });
+      }
+
+      // 수정완료! 버튼 클릭시 이벤트리스너
+      function save(num1, num2, num3) {
+        let edit_done = $(
+          `#li-${num1}-${num2}-${num3} > input[type=text]`
+        ).val();
+
+        console.log(num1, edit_done);
         $.ajax({
           type: "POST",
-          url: "/homework/delete",
-          data: {num_give: num},
+          url: "/test/edit",
+          data: {
+            edit_give: edit_done,
+            num1_give: num1,
+            num2_give: num2,
+            num3_give: num3,
+          },
           success: function (response) {
-            alert(response["msg"])
-            window.location.reload()
-          }
+            alert(response["msg"]);
+            window.location.reload();
+          },
         });
       }
 
+      function remove(num1, num2, num3) {
+        $.ajax({
+          type: "POST",
+          url: "/test/remove",
+          data: { num1_give: num1, num2_give: num2, num3_give: num3 },
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.reload();
+          },
+        });
+      }
     </script>
 
     <script>
@@ -200,25 +232,12 @@
           <button onclick="save_comment()" type="button" class="btn btn-dark">
             댓글 남기기
           </button>
-
-          <button type="button" class="btn btn-dark">
-            수정
-          </button>
-          <button onclick="delete_comment()" type="button" class="btn btn-dark">
-            삭제
-          </button>
+          <div id="comment_list">
 
         </div>
-        <div id="comment-list">
-          <div class="comments">
-            <div class="comments-body">
-              <blockquote class="blockquote mb-0">
-                <p>comment</p>
-                <footer class="from-who">name</footer>
-              </blockquote>
-            </div>
-          </div>
+
         </div>
+
       </div>
     </main>
   </body>
