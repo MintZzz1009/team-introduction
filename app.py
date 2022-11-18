@@ -9,6 +9,8 @@ db = client.dbsparta
 
 import random
 
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -79,15 +81,88 @@ def beeom_post():
         'comment': comment_receive
     }
 
-    db.homework.insert_one(doc)
+    db.beom.insert_one(doc)
     return jsonify({'msg':'응원 완료!'})
 
 @app.route("/beom", methods=["GET"])
 def beom_get():
-    comment_list = list(db.homework.find({},{'_id':False}))
+    comment_list = list(db.beom.find({},{'_id':False}))
     return jsonify({'comments':comment_list})
 
+# 승준 페이지 댓글 기능
+@app.route("/seungjun", methods=["POST"])
+def seungjun_post():
+    name_receive = request.form["name_give"]
+    comment_receive = request.form["comment_give"]
+
+    comment_list = list(db.seungjun.find({}, {'_id': False}))
+    count = len(comment_list) + 1
+
+    doc = {
+        'num':count,
+        'name': name_receive,
+        'comment': comment_receive,
+        'done': 0
+    }
+
+    db.seungjun.insert_one(doc)
+    return jsonify({'msg': '작성완료'})
+
+@app.route("/seungjun", methods=["GET"])
+def seungjun_get():
+    comment_list = list(db.seungjun.find({}, {'_id': False}))
+    return jsonify({'comments': comment_list})
+
+@app.route('/seungjun/delete', methods=['POST'])
+def seungjun_delete():
+    num_receive = request.form['num_give']
+    db.seungjun.update_one({'num': int(num_receive)},{'$set':{'done':1}})
+    return jsonify({'msg': '삭제 완료!'})
+
+
+# 기민 페이지 댓글 기능
+@app.route("/gimin", methods=["POST"])
+def gimin_post():
+   name_receive = request.form['name_give']
+   comment_receive = request.form['comment_give']
+
+   doc = {
+      'name':name_receive,
+      'comment':comment_receive
+   }
+
+   db.gimin.insert_one(doc)
+
+
+   return jsonify({'msg': '응원 완료!'})
+
+@app.route("/gimin", methods=["GET"])
+def gimin_get():
+   comment_list = list(db.gimin.find({}, {'_id': False}))
+   return jsonify({'comments': comment_list})
+
+
+
+# 학수 페이지 댓글 기능
+@app.route("/haksoo", methods=["POST"])
+def comment_post():
+    name_receive = request.form['name_give']
+    comment_receive = request.form['comment_give']
+
+    doc = {
+        'name':name_receive,
+        'comment':comment_receive
+    }
+    db.haksoo.insert_one(doc)
+    return jsonify({'msg': '댓글작성 완료!'})
+
+
+@app.route("/haksoo", methods=["GET"])
+def comment_get():
+    haksoo_list = list(db.haksoo.find({}, {'_id': False}))
+    return jsonify({'haksoos': haksoo_list})
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5555, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True)
+

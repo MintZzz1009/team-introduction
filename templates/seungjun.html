@@ -88,7 +88,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/homework",
+                url: "/seungjun",
                 data: {'name_give': name, 'comment_give': comment},
                 success: function (response) {
                     alert(response["msg"])
@@ -101,7 +101,7 @@
             $('#comment-list').empty()
             $.ajax({
                 type: "GET",
-                url: "/homework",
+                url: "/seungjun",
                 data: {},
                 success: function (response) {
                     let rows = response['comments']
@@ -135,7 +135,7 @@
         function delete_comment(num) {
             $.ajax({
                 type: "POST",
-                url: "/homework/delete",
+                url: "/seungjun/delete",
                 data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])

@@ -20,7 +20,7 @@
             crossorigin="anonymous"
     ></script>
 
-    <title>개인페이지</title>
+    <title>Gimin Kim</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link
@@ -67,11 +67,11 @@
             justify-content: center;
             align-items: center;
 
-            margin-left: 300px;
+            margin-left: 100px;
         }
 
         .img {
-            background-image: url("/static/img/image.png");
+            background-image: url("../static/img/gimin.png");
             background-position: center;
             background-size: cover;
             width: 200px;
@@ -80,7 +80,7 @@
         }
 
         .content {
-            width: 300px;
+            width: 400px;
             /* height: 500px; */
             height: 460px; /*추가*/
 
@@ -92,7 +92,7 @@
             /* justify-content: center; */
 
             /* margin-right: 50px; */
-            margin-right: 400px; /*추가*/
+            margin-right: 20px; /*추가*/
             padding: 20px; /*추가*/
 
             overflow-y: scroll; /*추가*/
@@ -174,7 +174,7 @@
             margin-right: 10px;
         }
 
-        .intro {
+        .name {
             width: 200px;
             height: 500px;
 
@@ -185,7 +185,7 @@
         }
 
         .guest {
-
+            background-color: red;
             width: 100%;
             height: 300px;
 
@@ -204,30 +204,6 @@
             align-items: center;
 
             margin-top: 100px;
-        }
-
-        .myframe {
-            width: 95%;
-            max-width: 500px;
-            margin: 20px auto 20px auto;
-
-            box-shadow: 0px 0px 3px 0px black;
-            padding: 20px;
-        }
-
-        .myframe > button {
-            margin-top: 15px;
-        }
-
-        .mycards {
-            width: 95%;
-            max-width: 500px;
-            margin: auto;
-        }
-
-        .mycards > .card {
-            margin-top: 10px;
-            margin-bottom: 10px;
         }
     </style>
     <script>
@@ -256,43 +232,38 @@
 
         function close_box2() {
             $("#cooperation").hide();
-        }
-
+    </script>
+     <script>
         $(document).ready(function () {
-            show_comment()
+            show_comment();
         });
 
-
         function save_comment() {
-
             let name = $('#name').val()
             let comment = $('#comment').val()
 
             $.ajax({
-                type: 'POST',
-                url: '/project',
-                data: {name_give: name, comment_give: comment},
+                type: "POST",
+                url: "/gimin",
+                data: {'name_give': name, 'comment_give': comment},
                 success: function (response) {
-                    alert(response['msg'])
+                    alert(response["msg"])
                     window.location.reload()
                 }
-            })
+            });
         }
 
         function show_comment() {
             $('#comment-list').empty()
-
             $.ajax({
                 type: "GET",
-                url: "/project",
+                url: "/gimin",
                 data: {},
                 success: function (response) {
-
                     let rows = response['comments']
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
-
 
                         let temp_html = `<div class="card">
                                             <div class="card-body">
@@ -300,14 +271,14 @@
                                                     <p>${comment}</p>
                                                     <footer class="blockquote-footer">${name}</footer>
                                                 </blockquote>
-                                            </div>
+
+                                           </div>
                                         </div>`
                         $('#comment-list').append(temp_html)
                     }
                 }
             });
         }
-
     </script>
 </head>
 
@@ -317,7 +288,7 @@
 <div class="me">
     <div class="pro">
         <div class="img"></div>
-        <div class="intro">
+        <div class="name">
             <p class="mini-title">
                 이름: 김기민 <br/>
                 나이: 27 <br/>
@@ -337,7 +308,7 @@
                 입니다<br/>
                 저의 mbti는 자주 바뀌는 편입니다<br/>
                 하지만 i와 j는 절대 변하지 않는 사실에 꽤나 놀라웠어요<br/>
-                이런 설문형 성격유형검사 같은 것들은 절대 안 믿지 않았었는데 mbti 만큼은 신뢰가
+                심리 퀴즈 같은 것들은 절대 안 믿지 않았었는데 mbti 만큼은 신뢰가
                 가더라고요<br/>
                 i인 만큼 집순이고 j인 만큼 파워 계획형 인간입니다<br/>
                 계획이 정리가 안되면 하루를 시작하지 못하는 편이에요:)<br/>
@@ -381,7 +352,7 @@
             <div>
                 제 의견을 말한 뒤 모든 사람들의 동의 여부를 다 물어보는 편이에요.<br/>
                 다른 의견 또한 꼭 들어본답니다.<br/>
-                가끔 의견 충돌이 있을 땐 그 의견 차이를 좁혀나가려구 노력합니다.<br/>
+                가끔 의견 충돌이 있을 땐 그 의견 차이를 좁혀나가려는 편이에요.<br/>
             </div>
             <div class="mybtns">
                 <button

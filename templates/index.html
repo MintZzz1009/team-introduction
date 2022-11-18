@@ -17,8 +17,7 @@
       crossorigin="anonymous"
     ></script>
 
-
-     <script>
+    <script>
       $(document).ready(function () {
         show_comment();
       });
@@ -54,12 +53,32 @@
               let num3 = rows[i]["num3"];
               console.log(typeof num1);
               console.log(num1);
-              let temp_html = `<li id="li-${num1}-${num2}-${num3}">
-                                            <h2>${comment}</h2><span>${name}</span>
-                                            <button onclick="addInput(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">수정</button>
-                                            <button onclick="remove(${num1}, ${num2}, ${num3})" type="button" class="btn btn-outline-primary">삭제</button>
-                                        </li>`;
+              let temp_html = `<div class="card">
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>${comment}</p>
+                <footer class="from-who">${name}</footer>
+              </blockquote>
+            </div>
+            <div class="comment-buttons">
+              <button
+                onclick="addInput(${num1}, ${num2}, ${num3})"
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                수정
+              </button>
+              <button
+                onclick="remove(${num1}, ${num2}, ${num3})"
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                삭제
+              </button>
+            </div>
+          </div>`;
               $("#comment_list").append(temp_html);
+
             }
           },
         });
@@ -120,15 +139,18 @@
     <script>
       function getWeather() {
         let city = document.getElementById("city").value;
-        fetch('https://goweather.herokuapp.com/weather/' + city)
-                .then((response) => response.json())
-                .then((data) => {
-                  document.getElementById("temp").innerHTML = data['temperature'],
-                          document.getElementById("desc").innerHTML = data['description'];
-                });
+        fetch("https://goweather.herokuapp.com/weather/" + city)
+          .then((response) => response.json())
+          .then((data) => {
+            (document.getElementById("temp").innerHTML = data["temperature"]),
+              (document.getElementById("desc").innerHTML = data["description"]);
+          });
       }
     </script>
-
+    <script
+      src="https://kit.fontawesome.com/ec13307674.js"
+      crossorigin="anonymous"
+    ></script>
     <title>코딩하고십조</title>
     <link rel="stylesheet" href="../static/css/team.css" />
   </head>
@@ -146,12 +168,21 @@
           <div class="team__introduction">
             <h1>코딩하고십조</h1>
             <p>
-              팀소개<br />저희는 이번 프로젝트에서
-              전 세계 나라들을 검색해 날씨를 확인할 수 있고 작성자와 글 한 줄을 남길 수 있으며
-              각 팀원들의 프로필을 누르면 정확한 정보를 확인할 수 있는 페이지를 만들었습니다
-              팀 프로젝트를 하면서 역할을 나누긴 했었지만 첫 프로젝트이다 보니 모르는 부분을 거의 같이 고민하며 해결하며 코드를 작성하였습니다
-              저희 팀의 궁극적인 목표는 완벽한 결과물보단 팀원들과 협업하는 방법을 깨우치고 개개인의 부족한 점을 정확히 깨달으며 공부의 방향성을
-              확실하게 잡는 게 저희의 목표입니다
+              저희는 이번 프로젝트에서 전 세계 나라들을 검색해
+              <span>날씨</span>를 확인할 수 있고 작성자의 이름과 글 한 줄로
+              <span>방명록</span>을 남길 수 있으며
+              <span>각 팀원들의 프로필</span>을 누르면 정확한 정보를 확인할 수
+              있는 페이지를 만들었습니다
+            </p>
+            <p>
+              팀 프로젝트를 하면서 역할을 나누긴 했었지만 첫
+              <span>협업</span> 프로젝트이다 보니 모르는 부분을 거의 같이
+              고민하고 해결하며 코드를 작성하였습니다
+            </p>
+            <p>
+              저희 팀의 <span>궁극적인 목표</span>는 완벽한 결과물보단 팀원들과
+              협업하는 방법을 깨우치고 개개인의 부족한 점을 정확히 깨달으며
+              공부의 방향성을 확실하게 잡는 게 저희의 목표입니다
             </p>
           </div>
           <div class="team__members">
@@ -163,48 +194,52 @@
         </div>
         <div class="team__contents-column">
           <div class="team__weather">
-             <h4>세계 도시 날씨</h4>
-    <input id="city" type="text" value="" list="depList">
-        <datalist id="depList">
-            <option value="seoul"></option>
-            <option value="London"></option>
-            <option value="algiers"></option>
-            <option value="Luanda"></option>
-            <option value="NewDelhi"></option>
-            <option value="Manila"></option>
-            <option value="moscow"></option>
-            <option value="bangkok"></option>
-            <option value="ankara"></option>
-            <option value="hanoi"></option>
-            <option value="paris"></option>
-            <option value="berlin"></option>
-            <option value="rome"></option>
-            <option value="athens"></option>
-            <option value="amsterdam"></option>
-            <option value="oslo"></option>
-            <option value="lisbon"></option>
-            <option value="canberra"></option>
-            <option value="brasilia"></option>
-            <option value="paramaribo"></option>
-            <option value="montevideo"></option>
-            <option value="mexico city"></option>
-        </datalist>
-    <button onclick="getWeather()">날씨 가져오기</button>
-    <h6 id="temp"></h6>
-    <h6 id="desc"></h6>
+            <h4>세계 도시 날씨</h4>
+            <div class="team__weather__world">
+              <div class="team__weather__world__search">
+                <input id="city" type="text" value="" list="depList" />
+                <datalist id="depList">
+                  <option value="seoul"></option>
+                  <option value="London"></option>
+                  <option value="algiers"></option>
+                  <option value="Luanda"></option>
+                  <option value="NewDelhi"></option>
+                  <option value="Manila"></option>
+                  <option value="moscow"></option>
+                  <option value="bangkok"></option>
+                  <option value="ankara"></option>
+                  <option value="hanoi"></option>
+                  <option value="paris"></option>
+                  <option value="berlin"></option>
+                  <option value="rome"></option>
+                  <option value="athens"></option>
+                  <option value="amsterdam"></option>
+                  <option value="oslo"></option>
+                  <option value="lisbon"></option>
+                  <option value="canberra"></option>
+                  <option value="brasilia"></option>
+                  <option value="paramaribo"></option>
+                  <option value="montevideo"></option>
+                  <option value="mexico city"></option>
+                </datalist>
+                <button onclick="getWeather()">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+              <div class="team__weather__world__output">
+                <h6 id="desc"></h6>
+                <h6 id="temp"></h6>
+              </div>
+            </div>
           </div>
 
           <div class="team__promise">
-            <h3>promise</h3><br />
-            시간 약속 잘 지키기
-            <br>
-            자리를 비울 시 미리 말해주기
-            <br>
-            적극적으로 프로젝트에 참여하기
-            <br>
-            상대방이 모르는 부분은 잘 알려주기
-            <br>
-            문제가 있는 부분은 공유하기
+            <h3>Promise</h3>
+            <p>🤙 시간 약속 잘 지키기</p>
+            <p>🤙 자리를 비울 시 미리 말해주기</p>
+            <p>🤙 적극적으로 프로젝트에 참여하기</p>
+            <p>🤙 상대방이 모르는 부분은 잘 알려주기</p>
+            <p>🤙 문제가 있는 부분은 공유하기</p>
           </div>
         </div>
       </div>
@@ -232,12 +267,33 @@
           <button onclick="save_comment()" type="button" class="btn btn-dark">
             댓글 남기기
           </button>
-          <div id="comment_list">
-
         </div>
-
+        <div id="comment_list">
+          <div class="card">
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>${comment}</p>
+                <footer class="from-who">${name}</footer>
+              </blockquote>
+            </div>
+            <div class="comment-buttons">
+              <button
+                onclick="addInput(${num1}, ${num2}, ${num3})"
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                수정
+              </button>
+              <button
+                onclick="remove(${num1}, ${num2}, ${num3})"
+                type="button"
+                class="btn btn-outline-primary"
+              >
+                삭제
+              </button>
+            </div>
+          </div>
         </div>
-
       </div>
     </main>
   </body>
